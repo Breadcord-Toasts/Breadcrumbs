@@ -1,4 +1,3 @@
-import inspect
 import sqlite3
 import time
 from datetime import datetime
@@ -10,7 +9,7 @@ from discord.ext import commands
 import breadcord
 
 
-class TagEditModal(discord.ui.Modal):
+class TagContentModal(discord.ui.Modal):
     content = discord.ui.TextInput(label="Tag Content", style=discord.TextStyle.long, min_length=1, max_length=2000)
 
     def __init__(self, *, default_content: str, edited: bool = False) -> None:
@@ -26,7 +25,7 @@ class TagEditModal(discord.ui.Modal):
         self.stop()
 
 
-class Tags(breadcord.module.ModuleCog, commands.GroupCog, name="tag"):
+class Breadcrumbs(breadcord.module.ModuleCog, commands.GroupCog, name="tag"):
     def __init__(self, name: str | None = None) -> None:
         super().__init__(name)
         self.module_settings = self.bot.settings.Breadboard
@@ -55,7 +54,7 @@ class Tags(breadcord.module.ModuleCog, commands.GroupCog, name="tag"):
         ).fetchone()
 
         edited = old_value is not None
-        modal = TagEditModal(default_content=old_value[0] if edited else "", edited=edited)
+        modal = TagContentModal(default_content=old_value[0] if edited else "", edited=edited)
         await interaction.response.send_modal(modal)
         await modal.wait()
 
@@ -117,4 +116,4 @@ class Tags(breadcord.module.ModuleCog, commands.GroupCog, name="tag"):
 
 
 async def setup(bot: breadcord.Bot):
-    await bot.add_cog(Tags())
+    await bot.add_cog(Breadcrumbs())
