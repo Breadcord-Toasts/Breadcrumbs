@@ -1,0 +1,8 @@
+manifest_version = 1
+
+[module]
+name = "Tags"
+description = "A tag module for Breadcord."
+version = "0.1.0"
+license = "GNU GPLv3"
+authors = ["Fripe"]
