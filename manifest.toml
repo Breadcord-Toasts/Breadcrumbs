@@ -2,6 +2,7 @@ manifest_version = 1
 
 [module]
 name = "Breadcrumbs"
+id = "breadcrumbs"
 description = "A breadcord module offering crumbs of information, aka tags."
 version = "1.0.0"
 license = "GNU GPLv3"

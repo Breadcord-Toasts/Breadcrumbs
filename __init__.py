@@ -26,8 +26,8 @@ class TagContentModal(discord.ui.Modal):
 
 
 class Breadcrumbs(breadcord.module.ModuleCog, commands.GroupCog, name="tag"):
-    def __init__(self, name: str | None = None) -> None:
-        super().__init__(name)
+    def __init__(self, module_id: str):
+        super().__init__(module_id)
         self.connection = sqlite3.connect(self.module.storage_path / "tags.db")
         self.cursor = self.connection.cursor()
         self.cursor.execute(
@@ -115,4 +115,4 @@ class Breadcrumbs(breadcord.module.ModuleCog, commands.GroupCog, name="tag"):
 
 
 async def setup(bot: breadcord.Bot):
-    await bot.add_cog(Breadcrumbs())
+    await bot.add_cog(Breadcrumbs("breadcrumbs"))
